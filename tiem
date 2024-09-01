@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गणना समय</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        #timer {
+            font-size: 2em;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #days {
+            color: #ff6347; /* Tomato */
+        }
+        #hours {
+            color: #4682b4; /* Steel Blue */
+        }
+        #minutes {
+            color: #32cd32; /* Lime Green */
+        }
+        #seconds {
+            color: #ffa500; /* Orange */
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #333;
+            width: 100%;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>घर फर्कने समय</h1>
+    <div id="timer">
+        <div class="time-unit">
+            <div id="days"></div>
+            <hr>
+        </div>
+        <div class="time-unit">
+            <div id="hours"></div>
+            <hr>
+        </div>
+        <div class="time-unit">
+            <div id="minutes"></div>
+            <hr>
+        </div>
+        <div class="time-unit">
+            <div id="seconds"></div>
+            <hr> <!-- Added an hr element for seconds to be consistent -->
+        </div>
+    </div>
+
+    <script>
+        // Set the end date
+        const endDate = new Date('2024-10-01T00:00:00').getTime();
+
+        // Update the countdown every 1 second
+        const countdown = setInterval(function () {
+            // Get current date and time
+            const now = new Date().getTime();
+
+            // Calculate the time difference between now and the end date
+            const timeLeft = endDate - now;
+
+            // Calculate days, hours, minutes, and seconds left
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the result in the respective elements in Nepali
+            document.getElementById("days").innerHTML = days + " दिन";
+            document.getElementById("hours").innerHTML = hours + " घण्टा";
+            document.getElementById("minutes").innerHTML = minutes + " मिनेट";
+            document.getElementById("seconds").innerHTML = seconds + " सेकेन्ड";
+
+            // If the countdown is finished, display some text
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                document.getElementById("timer").innerHTML = "तपाईं घर पुग्नुभयो!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
